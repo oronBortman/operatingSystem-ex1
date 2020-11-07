@@ -22,7 +22,6 @@
 
 enum POLY_TYPE {QUADRI = 4, HEXAGON = 6, OCTAGON = 8};
 enum WHOM_TO_OUTPUT {CURRENT, ALL_POLY, NONE};
-//enum WHOM_TO_OUTPUT {CURRENT, ALL_POLY};
 
 struct point {
    int x, y;
@@ -32,7 +31,6 @@ struct polygon {
      enum POLY_TYPE poly_type;
      struct point * vertices;
 }; 
-
 
 // *****   declarations of function prototypes   *****
 void my_exception(int line, const char* function, char* msg);
@@ -50,8 +48,9 @@ void print_polygon_area(struct polygon polygonToPrint);
 void print_polygon_points(size_t sizeOfVerticlesArr, struct point * verticles);
 struct point * get_verticles(enum POLY_TYPE polyType);
 void get_lines_of_verticles_and_add_to_verticles_arr(struct point ** verticles, int numOfLines);
-struct polygon * copyPolygon(struct polygon polygonOfNewNode);
+struct polygon * copy_polygon(struct polygon polygonOfNewNode);
 int get_num_of_points_by_polygon_type(enum POLY_TYPE polyType);
 int get_num_of_numbers_to_read_by_polygon_type(enum POLY_TYPE polyType);
-int getCoordinateFromNumber(unsigned long long number);
+int get_coordinate_from_number(unsigned long long number);
 void prog();
+void free_polygon(struct polygon* poly);

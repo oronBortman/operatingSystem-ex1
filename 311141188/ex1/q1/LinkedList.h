@@ -15,8 +15,9 @@ struct LinkedList {
     struct Node* tail;
 };
 
-int isListEmpty(struct LinkedList linkedList);
-struct Node * createNode(struct polygon polygonOfNewNode);
-void addDataToLinkedList(struct LinkedList * linkedList, struct polygon polygonToAdd);
-struct LinkedList createEmptyLinkedList();
-struct polygon * copyPolygon(struct polygon polygonOfNewNode);
+int is_list_empty(struct LinkedList linkedList);
+struct Node * create_node(struct polygon polygonOfNewNode);
+void add_data_to_linked_list(struct LinkedList * linkedList, struct polygon polygonToAdd);
+struct LinkedList create_empty_linked_list();
+struct polygon * copy_polygon(struct polygon polygonOfNewNode);
+void free_list(struct LinkedList * linkedList);

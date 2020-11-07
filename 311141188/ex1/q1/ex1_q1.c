@@ -1,3 +1,6 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
 #include "ex1_q1.h"
 #include "LinkedList.h"
 
@@ -229,6 +232,7 @@ void get_instruction_line(int* isFlagNOn, int* isFlagLOn, enum WHOM_TO_OUTPUT * 
 		i++;
 		c=instructionLine[i];
 	}
+	free(instructionLine);
 }
 
 //-----------------------------------------------
@@ -254,7 +258,7 @@ void print_poloygon(int isFlagdOn, int isFlagpOn, int isFlagaOn, struct polygon 
 }
 
 //-------------------------------------------------------
-int getCoordinateFromNumber(unsigned long long number)
+int get_coordinate_from_number(unsigned long long number)
 {
 	int coordinate=number % 256;
 	if(coordinate>127)
@@ -278,9 +282,9 @@ struct point * get_verticles(enum POLY_TYPE polyType)
 		for(int j=0; (numOfPointsReaden < numOfPoints) && (j < 4); j++, numOfPointsReaden++)
 		{
 			struct point newPoint;
-			newPoint.x=getCoordinateFromNumber(number);
+			newPoint.x=get_coordinate_from_number(number);
 			number = number / 256;
-			newPoint.y=getCoordinateFromNumber(number);
+			newPoint.y=get_coordinate_from_number(number);
 			number = number / 256;
 			verticles[numOfPointsReaden]=newPoint;
 		}
@@ -289,7 +293,7 @@ struct point * get_verticles(enum POLY_TYPE polyType)
 }
 
 //-------------------------------------------------------
-struct polygon * copyPolygon(struct polygon polygonOfNewNode)
+struct polygon * copy_polygon(struct polygon polygonOfNewNode)
 {
     struct polygon * newPolygon = (struct polygon*)malloc(sizeof(struct polygon));
     newPolygon->poly_type=polygonOfNewNode.poly_type;
@@ -307,9 +311,10 @@ struct polygon * copyPolygon(struct polygon polygonOfNewNode)
     return newPolygon;
 }
 
+//-------------------------------------------------------
 void prog()
 {
-	struct LinkedList linkedList = createEmptyLinkedList();
+	struct LinkedList linkedList = create_empty_linked_list();
     int isFlagNOn = FALSE;
     int isFlagLOn = FALSE;
     enum WHOM_TO_OUTPUT whomToOutput;
@@ -329,7 +334,8 @@ void prog()
         {
             newPolygon.poly_type=polyType;
             newPolygon.vertices = get_verticles(polyType);
-            addDataToLinkedList(&linkedList, newPolygon);
+            add_data_to_linked_list(&linkedList, newPolygon);
+			free_polygon(&newPolygon);
         }
         switch(whomToOutput)
         {
@@ -348,6 +354,24 @@ void prog()
                 }
                 break;
             }
+			case(NONE):
+			{
+				break;
+			}
          }
     }
+	free_list(&linkedList);
+}
+
+//-------------------------------------------------------
+void free_polygon(struct polygon* poly)
+{
+    free(poly->vertices);
+    free(poly);
+}
+
+//-------------------------------------------------------
+int main()
+{
+    prog();
 }

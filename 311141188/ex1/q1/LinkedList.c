@@ -6,16 +6,16 @@ int is_list_empty(struct LinkedList linkedList)
     return linkedList.head == NULL;
 }
 
-struct Node * create_node(struct polygon polygonOfNewNode)
+struct Node * create_node(struct polygon* polygonOfNewNode)
 {
-    struct polygon * newPolygon = copy_polygon(polygonOfNewNode);
+    struct polygon * newPolygon = polygonOfNewNode;
     struct Node * newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->poly=newPolygon;
     newNode->next=NULL;
     return newNode;
 }
 
-void add_data_to_linked_list(struct LinkedList * linkedList, struct polygon polygonToAdd)
+void add_data_to_linked_list(struct LinkedList * linkedList, struct polygon * polygonToAdd)
 {
     struct Node * newNode = create_node(polygonToAdd);
     if(linkedList->head == NULL && linkedList->tail == NULL)
@@ -27,11 +27,6 @@ void add_data_to_linked_list(struct LinkedList * linkedList, struct polygon poly
     {
         linkedList->tail->next = newNode;
         linkedList->tail = newNode;
-    }
-
-    for (int i = 0; i < 7;i++)
-    {
-        printf("{%d,%d}!", newNode->poly->vertices[i].x, newNode->poly->vertices[i].y);
     }
 }
 

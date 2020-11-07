@@ -274,7 +274,7 @@ struct point * get_verticles(enum POLY_TYPE polyType)
 {
     unsigned int numOfPoints = get_num_of_points_by_polygon_type(polyType);
 	unsigned int numOfLinesToRead = get_num_of_numbers_to_read_by_polygon_type(polyType);
-	struct point * verticles = malloc(sizeof(struct point) * numOfPoints);
+	struct point * vertices = malloc(sizeof(struct point) * numOfPoints);
 	int numOfPointsReaden=0;
 	for(int i = 0; i < numOfLinesToRead; i++)
     {
@@ -287,11 +287,11 @@ struct point * get_verticles(enum POLY_TYPE polyType)
 			number = number / 256;
 			newPoint.y = get_coordinate_from_number(number);
 			number = number / 256;
-			verticles[numOfPointsReaden] = newPoint;
+			vertices[numOfPointsReaden] = newPoint;
 		}
     }
 
-    return verticles;   
+    return vertices;   
 }
 
 //-------------------------------------------------------
@@ -324,18 +324,19 @@ void prog()
     int isFlagpOn = FALSE;
     int isFlagaOn = FALSE;
     enum POLY_TYPE polyType;
-    struct polygon newPolygon;
+	struct polygon* newPolygon;
 
     while(!isFlagLOn)
     {
+		newPolygon = (struct polygon*)malloc(sizeof(struct polygon));
         isFlagNOn = FALSE; isFlagLOn = FALSE; isFlagdOn = FALSE; isFlagpOn = FALSE; isFlagaOn = FALSE; 
 
         get_instruction_line(&isFlagNOn, &isFlagLOn, &whomToOutput, &isFlagdOn, &isFlagpOn, &isFlagaOn, &polyType);
 
         if(isFlagNOn)
         {
-            newPolygon.poly_type=polyType;
-            newPolygon.vertices = get_verticles(polyType);
+            newPolygon->poly_type=polyType;
+            newPolygon->vertices = get_verticles(polyType);
 
             add_data_to_linked_list(&linkedList, newPolygon);
         }
@@ -343,7 +344,7 @@ void prog()
         {
             case(CURRENT):
             {
-               print_poloygon(isFlagdOn, isFlagpOn, isFlagaOn, newPolygon);
+               print_poloygon(isFlagdOn, isFlagpOn, isFlagaOn, *newPolygon);
                break;
             }
             case(ALL_POLY):
@@ -360,9 +361,8 @@ void prog()
 			{
 				break;
 			}
-         }
-		free(newPolygon.vertices);
-  }
+        }
+    }
 	free_list(&linkedList);
 }
 
@@ -371,12 +371,6 @@ void free_polygon_pointer(struct polygon* poly)
 {
     free(poly->vertices);
     free(poly);
-}
-
-//-------------------------------------------------------
-void free_polygon(struct polygon poly)
-{
-	free(poly.vertices);
 }
 
 //-------------------------------------------------------

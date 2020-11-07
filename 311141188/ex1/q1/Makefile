@@ -8,7 +8,7 @@ PROG = ex1_q1
 all: $(PROG) test
 
 $(PROG): ex1_q1.o LinkedList.o 
-	$(CC) $(CFLAGS) LinkedList.o ex1_q1.o  -o $(PROG)
+	$(CC) $(CFLAGS) LinkedList.o ex1_q1.o  -o $(PROG) $(LDFLAGS)
 
 test:
 	# make sure you have input file in.txt.
@@ -16,10 +16,10 @@ test:
 	./$(PROG) < in.txt > out.log
 
 ex1_q1.o:  ex1_q1.h ex1_q1.c
-	$(CC) $(CFLAGS) -c ex1_q1.c
+	$(CC) $(CFLAGS) -c ex1_q1.c $(LDFLAGS)
 
 LinkedList.o:  LinkedList.h LinkedList.c 
-	$(CC) $(CFLAGS) -c LinkedList.c
+	$(CC) $(CFLAGS) -c LinkedList.c $(LDFLAGS)
 
 clean: 
 	$(RM) *.o *~ $(PROG)

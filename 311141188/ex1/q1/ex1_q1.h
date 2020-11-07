@@ -53,4 +53,5 @@ int get_num_of_points_by_polygon_type(enum POLY_TYPE polyType);
 int get_num_of_numbers_to_read_by_polygon_type(enum POLY_TYPE polyType);
 int get_coordinate_from_number(unsigned long long number);
 void prog();
-void free_polygon(struct polygon* poly);
+void free_polygon_pointer(struct polygon* poly);
+void free_polygon(struct polygon poly);

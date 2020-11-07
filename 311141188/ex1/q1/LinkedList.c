@@ -44,7 +44,7 @@ void free_list(struct LinkedList * linkedList)
     struct Node * nodeToDelete = currNode;
     while(currNode != NULL)
     {
-        free_polygon(currNode->poly);
+        free_polygon_pointer(currNode->poly);
         nodeToDelete=currNode;
         currNode = currNode->next;
         free(nodeToDelete);

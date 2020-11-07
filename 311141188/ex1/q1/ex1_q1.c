@@ -338,17 +338,6 @@ void prog()
             newPolygon.vertices = get_verticles(polyType);
 
             add_data_to_linked_list(&linkedList, newPolygon);
-			struct Node* head = linkedList.head;
-			struct point * vertices = head->poly->vertices;
-			for (int i = 0; i < 7;i++)
-			{
-				printf("{%d,%d}!!\n", vertices[i].x, vertices[i].y);
-			}
-			for (int i = 0; i < 7;i++)
-			{
-				printf("{%d,%d}**\n", vertices[i].x, vertices[i].y);
-			}
-
         }
         switch(whomToOutput)
         {
@@ -373,7 +362,7 @@ void prog()
 			}
          }
 		free(newPolygon.vertices);
-    }
+  }
 	free_list(&linkedList);
 }
 

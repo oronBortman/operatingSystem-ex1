@@ -336,7 +336,6 @@ void prog()
             newPolygon.poly_type=polyType;
             newPolygon.vertices = get_verticles(polyType);
             add_data_to_linked_list(&linkedList, newPolygon);
-			free_polygon(newPolygon);
         }
         switch(whomToOutput)
         {
@@ -359,7 +358,8 @@ void prog()
 			{
 				break;
 			}
-         }
+        }
+		free_polygon(newPolygon);
     }
 	free_list(&linkedList);
 }

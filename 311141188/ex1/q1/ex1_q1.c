@@ -280,16 +280,17 @@ struct point * get_verticles(enum POLY_TYPE polyType)
     {
 		unsigned long long number;
         scanf("%llX", &number);
-		for(int j=0; (numOfPointsReaden < numOfPoints) && (j < 4); j++, numOfPointsReaden++)
+		for (int j = 0; (numOfPointsReaden < numOfPoints) && (j < 4); j++, numOfPointsReaden++)
 		{
 			struct point newPoint;
-			newPoint.x=get_coordinate_from_number(number);
+			newPoint.x = get_coordinate_from_number(number);
 			number = number / 256;
-			newPoint.y=get_coordinate_from_number(number);
+			newPoint.y = get_coordinate_from_number(number);
 			number = number / 256;
-			verticles[numOfPointsReaden]=newPoint;
+			verticles[numOfPointsReaden] = newPoint;
 		}
     }
+
     return verticles;   
 }
 
@@ -335,8 +336,19 @@ void prog()
         {
             newPolygon.poly_type=polyType;
             newPolygon.vertices = get_verticles(polyType);
+
             add_data_to_linked_list(&linkedList, newPolygon);
-			free_polygon(newPolygon);
+			struct Node* head = linkedList.head;
+			struct point * vertices = head->poly->vertices;
+			for (int i = 0; i < 7;i++)
+			{
+				printf("{%d,%d}!!\n", vertices[i].x, vertices[i].y);
+			}
+			for (int i = 0; i < 7;i++)
+			{
+				printf("{%d,%d}**\n", vertices[i].x, vertices[i].y);
+			}
+
         }
         switch(whomToOutput)
         {
@@ -360,6 +372,7 @@ void prog()
 				break;
 			}
          }
+		free(newPolygon.vertices);
     }
 	free_list(&linkedList);
 }

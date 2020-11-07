@@ -28,6 +28,11 @@ void add_data_to_linked_list(struct LinkedList * linkedList, struct polygon poly
         linkedList->tail->next = newNode;
         linkedList->tail = newNode;
     }
+
+    for (int i = 0; i < 7;i++)
+    {
+        printf("{%d,%d}!", newNode->poly->vertices[i].x, newNode->poly->vertices[i].y);
+    }
 }
 
 struct LinkedList create_empty_linked_list()
